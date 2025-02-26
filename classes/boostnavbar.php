@@ -153,7 +153,7 @@ class becodenavbar implements \renderable {
     /**
      * Get all the becodenavbaritem elements.
      *
-     * @return becodenavbaritem[] Boost navbar items.
+     * @return becodenavbaritem[] Becode navbar items.
      */
     public function get_items(): array {
         return $this->items;
