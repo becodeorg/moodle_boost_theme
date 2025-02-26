@@ -16,13 +16,11 @@
 /**
  * Backward compatibility file for the old popover.js
  *
- * @module     theme_boost/popover
+ * @module     theme_becode/popover
  * @copyright  2020 Bas Brands <bas@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import Popover from './bootstrap/popover';
+import Popover from "./bootstrap/popover";
 
-export {
-    Popover
-};
+export { Popover };

@@ -17,7 +17,7 @@
 /**
  * A secure layout for the boost theme.
  *
- * @package   theme_boost
+ * @package   theme_becode
  * @copyright 2016 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -42,5 +42,4 @@ if (empty($PAGE->layout_options['noactivityheader'])) {
     $templatecontext['headercontent'] = $header->export_for_template($renderer);
 }
 
-echo $OUTPUT->render_from_template('theme_boost/secure', $templatecontext);
-
+echo $OUTPUT->render_from_template('theme_becode/secure', $templatecontext);

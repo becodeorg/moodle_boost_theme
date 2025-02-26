@@ -16,21 +16,21 @@
 /**
  * Sticky footer module.
  *
- * @module     theme_boost/sticky-footer
+ * @module     theme_becode/sticky-footer
  * @copyright  2022 Ferran Recio <ferran@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import Pending from 'core/pending';
-import {registerManager, init as defaultInit} from 'core/sticky-footer';
+import Pending from "core/pending";
+import { registerManager, init as defaultInit } from "core/sticky-footer";
 
 const SELECTORS = {
-    STICKYFOOTER: '.stickyfooter',
-    PAGE: '#page',
+  STICKYFOOTER: ".stickyfooter",
+  PAGE: "#page",
 };
 
 const CLASSES = {
-    HASSTICKYFOOTER: 'hasstickyfooter',
+  HASSTICKYFOOTER: "hasstickyfooter",
 };
 
 let initialized = false;
@@ -44,21 +44,21 @@ let enabled = false;
  * @package
  */
 const scrollSpy = () => {
-    if (!enabled) {
-        return;
-    }
-    // Ignore scroll if page size is not small.
-    if (document.body.clientWidth >= 768) {
-        return;
-    }
-    // Detect if scroll is going down.
-    let scrollPosition = window.scrollY;
-    if (scrollPosition > previousScrollPosition) {
-        hideStickyFooter();
-    } else {
-        showStickyFooter();
-    }
-    previousScrollPosition = scrollPosition;
+  if (!enabled) {
+    return;
+  }
+  // Ignore scroll if page size is not small.
+  if (document.body.clientWidth >= 768) {
+    return;
+  }
+  // Detect if scroll is going down.
+  let scrollPosition = window.scrollY;
+  if (scrollPosition > previousScrollPosition) {
+    hideStickyFooter();
+  } else {
+    showStickyFooter();
+  }
+  previousScrollPosition = scrollPosition;
 };
 
 /**
@@ -66,71 +66,71 @@ const scrollSpy = () => {
  * @returns {Boolean} true if the sticky footer is enabled automatic.
  */
 const isDisabledByDefault = () => {
-    const footer = document.querySelector(SELECTORS.STICKYFOOTER);
-    if (!footer) {
-        return false;
-    }
-    return !!footer.dataset.disable;
+  const footer = document.querySelector(SELECTORS.STICKYFOOTER);
+  if (!footer) {
+    return false;
+  }
+  return !!footer.dataset.disable;
 };
 
 /**
  * Show the sticky footer in the page.
  */
 const showStickyFooter = () => {
-    // We need some seconds to make sure the CSS animation is ready.
-    const pendingPromise = new Pending('theme_boost/sticky-footer:enabling');
-    const footer = document.querySelector(SELECTORS.STICKYFOOTER);
-    const page = document.querySelector(SELECTORS.PAGE);
-    if (footer && page) {
-        document.body.classList.add(CLASSES.HASSTICKYFOOTER);
-        page.classList.add(CLASSES.HASSTICKYFOOTER);
-    }
-    setTimeout(() => pendingPromise.resolve(), 1000);
+  // We need some seconds to make sure the CSS animation is ready.
+  const pendingPromise = new Pending("theme_becode/sticky-footer:enabling");
+  const footer = document.querySelector(SELECTORS.STICKYFOOTER);
+  const page = document.querySelector(SELECTORS.PAGE);
+  if (footer && page) {
+    document.body.classList.add(CLASSES.HASSTICKYFOOTER);
+    page.classList.add(CLASSES.HASSTICKYFOOTER);
+  }
+  setTimeout(() => pendingPromise.resolve(), 1000);
 };
 
 /**
  * Hide the sticky footer in the page.
  */
 const hideStickyFooter = () => {
-    document.body.classList.remove(CLASSES.HASSTICKYFOOTER);
-    const page = document.querySelector(SELECTORS.PAGE);
-    page?.classList.remove(CLASSES.HASSTICKYFOOTER);
+  document.body.classList.remove(CLASSES.HASSTICKYFOOTER);
+  const page = document.querySelector(SELECTORS.PAGE);
+  page?.classList.remove(CLASSES.HASSTICKYFOOTER);
 };
 
 /**
  * Enable sticky footer in the page.
  */
 export const enableStickyFooter = () => {
-    enabled = true;
-    showStickyFooter();
+  enabled = true;
+  showStickyFooter();
 };
 
 /**
  * Disable sticky footer in the page.
  */
 export const disableStickyFooter = () => {
-    enabled = false;
-    hideStickyFooter();
+  enabled = false;
+  hideStickyFooter();
 };
 
 /**
  * Initialize the module.
  */
 export const init = () => {
-    // Prevent sticky footer in behat.
-    if (initialized || document.body.classList.contains('behat-site')) {
-        defaultInit();
-        return;
-    }
-    initialized = true;
-    if (!isDisabledByDefault()) {
-        enableStickyFooter();
-    }
+  // Prevent sticky footer in behat.
+  if (initialized || document.body.classList.contains("behat-site")) {
+    defaultInit();
+    return;
+  }
+  initialized = true;
+  if (!isDisabledByDefault()) {
+    enableStickyFooter();
+  }
 
-    document.addEventListener("scroll", scrollSpy);
+  document.addEventListener("scroll", scrollSpy);
 
-    registerManager({
-        enableStickyFooter,
-        disableStickyFooter,
-    });
+  registerManager({
+    enableStickyFooter,
+    disableStickyFooter,
+  });
 };

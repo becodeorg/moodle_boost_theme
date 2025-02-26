@@ -17,7 +17,7 @@
 /**
  * A drawer based layout for the boost theme.
  *
- * @package   theme_boost
+ * @package   theme_becode
  * @copyright 2021 Bas Brands
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -104,4 +104,4 @@ $templatecontext = [
     'addblockbutton' => $addblockbutton
 ];
 
-echo $OUTPUT->render_from_template('theme_boost/drawers', $templatecontext);
+echo $OUTPUT->render_from_template('theme_becode/drawers', $templatecontext);

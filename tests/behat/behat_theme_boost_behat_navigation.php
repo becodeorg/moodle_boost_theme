@@ -25,12 +25,13 @@ use Behat\Mink\Exception\ExpectationException as ExpectationException;
 /**
  * Step definitions related to the navigation in the Boost theme.
  *
- * @package    theme_boost
+ * @package    theme_becode
  * @category   test
  * @copyright  2021 Mihail Geshoski
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class behat_theme_boost_behat_navigation extends behat_navigation {
+class behat_theme_becode_behat_navigation extends behat_navigation
+{
     /**
      * Checks whether a node is active in the navbar.
      *
@@ -40,9 +41,12 @@ class behat_theme_boost_behat_navigation extends behat_navigation {
      * @param string      $element The name of the nav elemnent to look for.
      * @return void
      */
-    public function i_should_see_is_active_in_navigation($element) {
-        $this->execute("behat_general::assert_element_contains_text",
-            [$element, '.navbar .nav-link.active', 'css_element']);
+    public function i_should_see_is_active_in_navigation($element)
+    {
+        $this->execute(
+            "behat_general::assert_element_contains_text",
+            [$element, '.navbar .nav-link.active', 'css_element']
+        );
     }
     /**
      * Checks whether a node is active in the secondary nav.
@@ -52,9 +56,12 @@ class behat_theme_boost_behat_navigation extends behat_navigation {
      * @param string      $element The name of the nav elemnent to look for.
      * @return void
      */
-    public function i_should_see_is_active_in_secondary_navigation($element) {
-        $this->execute("behat_general::assert_element_contains_text",
-            [$element, '.secondary-navigation .nav-link.active', 'css_element']);
+    public function i_should_see_is_active_in_secondary_navigation($element)
+    {
+        $this->execute(
+            "behat_general::assert_element_contains_text",
+            [$element, '.secondary-navigation .nav-link.active', 'css_element']
+        );
     }
 
     /**
@@ -67,7 +74,8 @@ class behat_theme_boost_behat_navigation extends behat_navigation {
      * @param string|null $not Instructs to checks whether the element does not exist in the user menu, if defined
      * @return void
      */
-    public function lang_menu_should_exist($not = null) {
+    public function lang_menu_should_exist($not = null)
+    {
         $callfunction = is_null($not) ? 'should_exist' : 'should_not_exist';
         $this->execute("behat_general::{$callfunction}", [$this->get_lang_menu_xpath(), 'xpath_element']);
     }
@@ -84,10 +92,13 @@ class behat_theme_boost_behat_navigation extends behat_navigation {
      * @param string|null $not Instructs to checks whether the element does not exist in the user menu, if defined
      * @return void
      */
-    public function should_exist_in_lang_menu($itemtext, $selectortype, $not = null) {
+    public function should_exist_in_lang_menu($itemtext, $selectortype, $not = null)
+    {
         $callfunction = is_null($not) ? 'should_exist_in_the' : 'should_not_exist_in_the';
-        $this->execute("behat_general::{$callfunction}",
-            [$itemtext, $selectortype, $this->get_lang_menu_xpath(), 'xpath_element']);
+        $this->execute(
+            "behat_general::{$callfunction}",
+            [$itemtext, $selectortype, $this->get_lang_menu_xpath(), 'xpath_element']
+        );
     }
 
     /**
@@ -95,7 +106,8 @@ class behat_theme_boost_behat_navigation extends behat_navigation {
      *
      * @return string The xpath
      */
-    protected function get_lang_menu_xpath() {
+    protected function get_lang_menu_xpath()
+    {
         return "//nav[contains(concat(' ', @class, ' '), ' navbar ')]" .
             "//div[contains(concat(' ', @class, ' '),  ' langmenu ')]" .
             "//div[contains(concat(' ', @class, ' '), ' dropdown-menu ')]";

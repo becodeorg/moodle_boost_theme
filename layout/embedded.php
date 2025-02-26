@@ -17,7 +17,7 @@
 /**
  * An embedded layout for the boost theme.
  *
- * @package   theme_boost
+ * @package   theme_becode
  * @copyright 2016 Damyon Wiese
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,4 +35,4 @@ $templatecontext = [
     'fakeblocks' => $fakeblockshtml,
 ];
 
-echo $OUTPUT->render_from_template('theme_boost/embedded', $templatecontext);
+echo $OUTPUT->render_from_template('theme_becode/embedded', $templatecontext);

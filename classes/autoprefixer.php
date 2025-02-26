@@ -21,12 +21,13 @@
  * theme Boost when working with Bootstrap 4 alpha. We do not recommend
  * that this tool is shared, nor used outside of this theme.
  *
- * @package    theme_boost
+ * @package    theme_becode
  * @copyright  2016 Frédéric Massart - FMCorz.net
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_boost;
+namespace theme_becode;
+
 defined('MOODLE_INTERNAL') || die();
 
 use Sabberworm\CSS\CSSList\CSSList;
@@ -54,11 +55,12 @@ use Sabberworm\CSS\Value\ValueList;
  *
  * Very basic implementation covering simple needs for Bootstrap 4.
  *
- * @package    theme_boost
+ * @package    theme_becode
  * @copyright  2016 Frédéric Massart - FMCorz.net
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class autoprefixer {
+class autoprefixer
+{
 
     /** @var object The CSS tree. */
     protected $tree;
@@ -103,12 +105,13 @@ class autoprefixer {
      *
      * @param Document $tree The CSS tree.
      */
-    public function __construct(Document $tree) {
-        debugging('theme_boost\autoprefixer() is deprecated. Required prefixes for Bootstrap ' .
+    public function __construct(Document $tree)
+    {
+        debugging('theme_becode\autoprefixer() is deprecated. Required prefixes for Bootstrap ' .
             'are now in theme/boost/scss/moodle/prefixes.scss', DEBUG_DEVELOPER);
         $this->tree = $tree;
 
-        $pseudos = array_map(function($pseudo) {
+        $pseudos = array_map(function ($pseudo) {
             return '(' . preg_quote($pseudo) . ')';
         }, array_keys(self::$pseudos));
         $this->pseudosregex = '(' . implode('|', $pseudos) . ')';
@@ -120,7 +123,8 @@ class autoprefixer {
      * @param array $rules The rules.
      * @return New array of rules.
      */
-    protected function manipulateRuleValues(array $rules) {
+    protected function manipulateRuleValues(array $rules)
+    {
         $finalrules = [];
 
         foreach ($rules as $rule) {
@@ -131,10 +135,11 @@ class autoprefixer {
                 $newrule = clone $rule;
                 $newrule->setValue('-webkit-sticky');
                 $finalrules[] = $newrule;
-
-            } else if ($property === 'background-image' &&
-                    $value instanceof CSSFunction &&
-                    $value->getName() === 'linear-gradient') {
+            } else if (
+                $property === 'background-image' &&
+                $value instanceof CSSFunction &&
+                $value->getName() === 'linear-gradient'
+            ) {
 
                 foreach (['-webkit-', '-o-'] as $prefix) {
                     $newfunction = clone $value;
@@ -154,7 +159,8 @@ class autoprefixer {
     /**
      * Prefix all the things!
      */
-    public function prefix() {
+    public function prefix()
+    {
         $this->processBlock($this->tree);
     }
 
@@ -164,7 +170,8 @@ class autoprefixer {
      * @param object $block A block.
      * @param object $parent The parent of the block.
      */
-    protected function processBlock($block) {
+    protected function processBlock($block)
+    {
         foreach ($block->getContents() as $node) {
             if ($node instanceof AtRule) {
 
@@ -177,7 +184,6 @@ class autoprefixer {
                         if ($node instanceof KeyFrame) {
                             $newnode->setVendorKeyFrame($newname);
                             $block->insert($newnode, $node);
-
                         } else {
                             debugging('Unhandled atRule prefixing.', DEBUG_DEVELOPER);
                         }
@@ -187,7 +193,6 @@ class autoprefixer {
 
             if ($node instanceof CSSList) {
                 $this->processBlock($node);
-
             } else if ($node instanceof RuleSet) {
                 $this->processDeclaration($node, $block);
             }
@@ -200,7 +205,8 @@ class autoprefixer {
      * @param object $node The declaration block.
      * @param object $parent The parent.
      */
-    protected function processDeclaration($node, $parent) {
+    protected function processDeclaration($node, $parent)
+    {
         $rules = [];
 
         foreach ($node->getRules() as $key => $rule) {

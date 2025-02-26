@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Privacy Subsystem implementation for theme_boost.
+ * Privacy Subsystem implementation for theme_becode.
  *
- * @package    theme_boost
+ * @package    theme_becode
  * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_boost\privacy;
+namespace theme_becode\privacy;
 
 use \core_privacy\local\metadata\collection;
 
@@ -38,7 +38,8 @@ class provider implements
     // This plugin has data.
     \core_privacy\local\metadata\provider,
     // This plugin has some sitewide user preferences to export.
-    \core_privacy\local\request\user_preference_provider {
+    \core_privacy\local\request\user_preference_provider
+{
 
     /** The user preferences for the course index. */
     const DRAWER_OPEN_INDEX = 'drawer-open-index';
@@ -52,7 +53,8 @@ class provider implements
      * @param  collection $items The initialised item collection to add items to.
      * @return collection A listing of user data stored through this system.
      */
-    public static function get_metadata(collection $items): collection {
+    public static function get_metadata(collection $items): collection
+    {
         $items->add_user_preference(self::DRAWER_OPEN_INDEX, 'privacy:metadata:preference:draweropenindex');
         $items->add_user_preference(self::DRAWER_OPEN_BLOCK, 'privacy:metadata:preference:draweropenblock');
         return $items;
@@ -63,17 +65,18 @@ class provider implements
      *
      * @param int $userid The userid of the user whose data is to be exported.
      */
-    public static function export_user_preferences(int $userid) {
+    public static function export_user_preferences(int $userid)
+    {
 
         $draweropenindexpref = get_user_preferences(self::DRAWER_OPEN_INDEX, null, $userid);
 
         if (isset($draweropenindexpref)) {
-            $preferencestring = get_string('privacy:drawerindexclosed', 'theme_boost');
+            $preferencestring = get_string('privacy:drawerindexclosed', 'theme_becode');
             if ($draweropenindexpref == 1) {
-                $preferencestring = get_string('privacy:drawerindexopen', 'theme_boost');
+                $preferencestring = get_string('privacy:drawerindexopen', 'theme_becode');
             }
             \core_privacy\local\request\writer::export_user_preference(
-                'theme_boost',
+                'theme_becode',
                 self::DRAWER_OPEN_INDEX,
                 $draweropenindexpref,
                 $preferencestring
@@ -83,12 +86,12 @@ class provider implements
         $draweropenblockpref = get_user_preferences(self::DRAWER_OPEN_BLOCK, null, $userid);
 
         if (isset($draweropenblockpref)) {
-            $preferencestring = get_string('privacy:drawerblockclosed', 'theme_boost');
+            $preferencestring = get_string('privacy:drawerblockclosed', 'theme_becode');
             if ($draweropenblockpref == 1) {
-                $preferencestring = get_string('privacy:drawerblockopen', 'theme_boost');
+                $preferencestring = get_string('privacy:drawerblockopen', 'theme_becode');
             }
             \core_privacy\local\request\writer::export_user_preference(
-                'theme_boost',
+                'theme_becode',
                 self::DRAWER_OPEN_BLOCK,
                 $draweropenblockpref,
                 $preferencestring

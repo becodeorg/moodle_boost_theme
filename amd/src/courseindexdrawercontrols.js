@@ -16,17 +16,16 @@
 /**
  * Controls for the course index drawer, such as expand-all/collapse-all sections.
  *
- * @module     theme_boost/courseindexdrawercontrols
+ * @module     theme_becode/courseindexdrawercontrols
  * @copyright  2023 Stefan Topfstedt
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-import {BaseComponent} from 'core/reactive';
-import {getCurrentCourseEditor} from 'core_courseformat/courseeditor';
+import { BaseComponent } from "core/reactive";
+import { getCurrentCourseEditor } from "core_courseformat/courseeditor";
 
 export default class Component extends BaseComponent {
-
   create() {
-    this.name = 'courseindexdrawercontrols';
+    this.name = "courseindexdrawercontrols";
     this.selectors = {
       COLLAPSEALL: `[data-action="collapseallcourseindexsections"]`,
       EXPANDALL: `[data-action="expandallcourseindexsections"]`,
@@ -53,12 +52,11 @@ export default class Component extends BaseComponent {
     // Attach the on-click event handlers to the expand-all and collapse-all buttons, if present.
     const expandAllBtn = this.getElement(this.selectors.EXPANDALL);
     if (expandAllBtn) {
-      this.addEventListener(expandAllBtn, 'click', this._expandAllSections);
-
+      this.addEventListener(expandAllBtn, "click", this._expandAllSections);
     }
     const collapseAllBtn = this.getElement(this.selectors.COLLAPSEALL);
     if (collapseAllBtn) {
-      this.addEventListener(collapseAllBtn, 'click', this._collapseAllSections);
+      this.addEventListener(collapseAllBtn, "click", this._collapseAllSections);
     }
   }
 
@@ -84,6 +82,6 @@ export default class Component extends BaseComponent {
    * @private
    */
   _toggleAllSections(expandOrCollapse) {
-    this.reactive.dispatch('allSectionsIndexCollapsed', expandOrCollapse);
+    this.reactive.dispatch("allSectionsIndexCollapsed", expandOrCollapse);
   }
 }

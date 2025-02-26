@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace theme_boost\output;
+namespace theme_becode\output;
 
 use moodle_url;
 use html_writer;
@@ -25,11 +25,12 @@ defined('MOODLE_INTERNAL') || die;
 /**
  * Renderers to align Moodle's HTML with that expected by Bootstrap
  *
- * @package    theme_boost
+ * @package    theme_becode
  * @copyright  2012 Bas Brands, www.basbrands.nl
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class core_renderer extends \core_renderer {
+class core_renderer extends \core_renderer
+{
 
     /**
      * Returns HTML to display a "Turn editing on/off" button in a form.
@@ -38,7 +39,8 @@ class core_renderer extends \core_renderer {
      * @param string $method
      * @return string HTML the button
      */
-    public function edit_button(moodle_url $url, string $method = 'post') {
+    public function edit_button(moodle_url $url, string $method = 'post')
+    {
         if ($this->page->theme->haseditswitch) {
             return;
         }
@@ -59,8 +61,9 @@ class core_renderer extends \core_renderer {
      *
      * @return string the HTML for the navbar.
      */
-    public function navbar(): string {
-        $newnav = new \theme_boost\boostnavbar($this->page);
+    public function navbar(): string
+    {
+        $newnav = new \theme_becode\boostnavbar($this->page);
         return $this->render_from_template('core/navbar', $newnav);
     }
 
@@ -71,7 +74,8 @@ class core_renderer extends \core_renderer {
      * @param int $headinglevel What 'h' level to make the heading.
      * @return string A rendered context header.
      */
-    public function context_header($headerinfo = null, $headinglevel = 1): string {
+    public function context_header($headerinfo = null, $headinglevel = 1): string
+    {
         global $DB, $USER, $CFG;
         require_once($CFG->dirroot . '/user/lib.php');
         $context = $this->page->context;
@@ -166,18 +170,21 @@ class core_renderer extends \core_renderer {
                             $contactimage = 't/removecontact';
                         }
                         $userbuttons['togglecontact'] = array(
-                                'buttontype' => 'togglecontact',
-                                'title' => get_string($contacttitle, 'message'),
-                                'url' => new moodle_url('/message/index.php', array(
-                                        'user1' => $USER->id,
-                                        'user2' => $user->id,
-                                        $contacturlaction => $user->id,
-                                        'sesskey' => sesskey())
-                                ),
-                                'image' => $contactimage,
-                                'linkattributes' => $linkattributes,
-                                'page' => $this->page
-                            );
+                            'buttontype' => 'togglecontact',
+                            'title' => get_string($contacttitle, 'message'),
+                            'url' => new moodle_url(
+                                '/message/index.php',
+                                array(
+                                    'user1' => $USER->id,
+                                    'user2' => $user->id,
+                                    $contacturlaction => $user->id,
+                                    'sesskey' => sesskey()
+                                )
+                            ),
+                            'image' => $contactimage,
+                            'linkattributes' => $linkattributes,
+                            'page' => $this->page
+                        );
                     }
 
                     $this->page->requires->string_for_js('changesmadereallygoaway', 'moodle');
@@ -223,7 +230,8 @@ class core_renderer extends \core_renderer {
      *
      * @return boolean true if the page has fakeblocks and this is the first visit.
      */
-    public function firstview_fakeblocks(): bool {
+    public function firstview_fakeblocks(): bool
+    {
         global $SESSION;
 
         $firstview = false;

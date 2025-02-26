@@ -16,13 +16,11 @@
 /**
  * Backward compatibility file for the old toast.js
  *
- * @module     theme_boost/toast
+ * @module     theme_becode/toast
  * @copyright  2020 Bas Brands <bas@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import Toast from './bootstrap/toast';
+import Toast from "./bootstrap/toast";
 
-export {
-    Toast
-};
+export { Toast };
