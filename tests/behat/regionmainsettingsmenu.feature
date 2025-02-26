@@ -1,6 +1,6 @@
 @javascript @theme_becode
 Feature: Region main settings menu
-  To navigate in boost theme I need to use the region main settings menu
+  To navigate in becode theme I need to use the region main settings menu
 
   Background:
     Given the following "courses" exist:

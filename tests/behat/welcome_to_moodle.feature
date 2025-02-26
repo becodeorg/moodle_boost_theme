@@ -1,5 +1,5 @@
 @javascript @theme_becode
-Feature: Welcome message on boost
+Feature: Welcome message on becode
   To be welcome in moodle
   As a User
   I need to see a welcome message on the first page

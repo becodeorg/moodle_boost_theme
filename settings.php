@@ -23,20 +23,15 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
-    $settings = new theme_becode_admin_settingspage_tabs('themesettingboost', get_string('configtitle', 'theme_becode'));
+    $settings = new theme_becode_admin_settingspage_tabs('themesettingbecode', get_string('configtitle', 'theme_becode'));
     $page = new admin_settingpage('theme_becode_general', get_string('generalsettings', 'theme_becode'));
 
     // Unaddable blocks.
     // Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
     // Section links.
     $default = 'navigation,settings,course_list,section_links';
-    $setting = new admin_setting_configtext(
-        'theme_becode/unaddableblocks',
-        get_string('unaddableblocks', 'theme_becode'),
-        get_string('unaddableblocks_desc', 'theme_becode'),
-        $default,
-        PARAM_TEXT
-    );
+    $setting = new admin_setting_configtext('theme_becode/unaddableblocks',
+        get_string('unaddableblocks', 'theme_becode'), get_string('unaddableblocks_desc', 'theme_becode'), $default, PARAM_TEXT);
     $page->add($setting);
 
     // Preset.
@@ -57,23 +52,17 @@ if ($ADMIN->fulltree) {
     $choices['default.scss'] = 'default.scss';
     $choices['plain.scss'] = 'plain.scss';
 
-    $setting = new admin_setting_configthemepreset($name, $title, $description, $default, $choices, 'boost');
+    $setting = new admin_setting_configthemepreset($name, $title, $description, $default, $choices, 'becode');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Preset files setting.
     $name = 'theme_becode/presetfiles';
-    $title = get_string('presetfiles', 'theme_becode');
+    $title = get_string('presetfiles','theme_becode');
     $description = get_string('presetfiles_desc', 'theme_becode');
 
-    $setting = new admin_setting_configstoredfile(
-        $name,
-        $title,
-        $description,
-        'preset',
-        0,
-        array('maxfiles' => 20, 'accepted_types' => array('.scss'))
-    );
+    $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
+        array('maxfiles' => 20, 'accepted_types' => array('.scss')));
     $page->add($setting);
 
     // Background image setting.
@@ -107,24 +96,14 @@ if ($ADMIN->fulltree) {
     $page = new admin_settingpage('theme_becode_advanced', get_string('advancedsettings', 'theme_becode'));
 
     // Raw SCSS to include before the content.
-    $setting = new admin_setting_scsscode(
-        'theme_becode/scsspre',
-        get_string('rawscsspre', 'theme_becode'),
-        get_string('rawscsspre_desc', 'theme_becode'),
-        '',
-        PARAM_RAW
-    );
+    $setting = new admin_setting_scsscode('theme_becode/scsspre',
+        get_string('rawscsspre', 'theme_becode'), get_string('rawscsspre_desc', 'theme_becode'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     // Raw SCSS to include after the content.
-    $setting = new admin_setting_scsscode(
-        'theme_becode/scss',
-        get_string('rawscss', 'theme_becode'),
-        get_string('rawscss_desc', 'theme_becode'),
-        '',
-        PARAM_RAW
-    );
+    $setting = new admin_setting_scsscode('theme_becode/scss', get_string('rawscss', 'theme_becode'),
+        get_string('rawscss_desc', 'theme_becode'), '', PARAM_RAW);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 

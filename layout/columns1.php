@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A one column layout for the boost theme.
+ * A one column layout for the becode theme.
  *
  * @package   theme_becode
  * @copyright 2016 Damyon Wiese
@@ -38,3 +38,4 @@ if (empty($PAGE->layout_options['noactivityheader'])) {
 }
 
 echo $OUTPUT->render_from_template('theme_becode/columns1', $templatecontext);
+

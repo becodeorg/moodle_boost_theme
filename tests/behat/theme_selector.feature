@@ -17,13 +17,13 @@ Feature: Select a theme in Boost theme
 
   @javascript
   Scenario: I am able to change the theme using the modal window select button
-    Given I should see "Current theme" in the "#theme-card-boost" "css_element"
+    Given I should see "Current theme" in the "#theme-card-becode" "css_element"
     When I click on "Preview theme 'Classic'" "button"
     And I click on "Select theme" "button" in the "Classic" "dialogue"
     Then I should see "Current theme" in the "#theme-card-classic" "css_element"
 
   Scenario: I am able to change the theme using the normal select button
-    Given I should see "Current theme" in the "#theme-card-boost" "css_element"
+    Given I should see "Current theme" in the "#theme-card-becode" "css_element"
     When I click on "Select theme 'Classic'" "button"
     Then I should see "Current theme" in the "#theme-card-classic" "css_element"
 

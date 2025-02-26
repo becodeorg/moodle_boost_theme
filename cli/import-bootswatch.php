@@ -25,8 +25,8 @@
 
 define('CLI_SCRIPT', true);
 
-require(__DIR__ . '/../../../config.php');
-require_once($CFG->libdir . '/clilib.php');
+require(__DIR__.'/../../../config.php');
+require_once($CFG->libdir.'/clilib.php');
 
 $usage = "
 Utility to convert a Bootswatch theme to a Moodle preset compatible with Bootstrap 4.
@@ -56,7 +56,7 @@ list($options, $unrecognised) = cli_get_params([
 ]);
 
 if ($unrecognised) {
-    $unrecognised = implode(PHP_EOL . '  ', $unrecognised);
+    $unrecognised = implode(PHP_EOL.'  ', $unrecognised);
     cli_error(get_string('cliunknowoption', 'core_admin', $unrecognised));
 }
 
@@ -69,7 +69,7 @@ if (is_readable($options['variables'])) {
     $sourcevariables = file_get_contents($options['variables']);
 } else {
     cli_writeln($usage);
-    cli_error('Error reading the variables file: ' . $options['variables']);
+    cli_error('Error reading the variables file: '.$options['variables']);
 }
 
 
@@ -77,7 +77,7 @@ if (is_readable($options['bootswatch'])) {
     $sourcebootswatch = file_get_contents($options['bootswatch']);
 } else {
     cli_writeln($usage);
-    cli_error('Error reading the bootswatch file: ' . $options['bootswatch']);
+    cli_error('Error reading the bootswatch file: '.$options['bootswatch']);
 }
 
 // Write the preset file.

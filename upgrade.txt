@@ -3,7 +3,7 @@
 This file has been replaced by UPGRADING.md. See MDL-81125 for further information.
 
 ===
-This file describes API changes in /theme/boost
+This file describes API changes in /theme/becode
 information provided here is intended especially for theme designers.
 
 === 4.4 ===
@@ -122,7 +122,7 @@ $font-size-base: 0.9375rem
 
 Bootswatches
 ------------
-Bootstrap 4 bootswatches can be imported using the theme/boost/cli/import-bootswatch.php script. Generated bootswatches can be added in the theme boost settings page.
+Bootstrap 4 bootswatches can be imported using the theme/becode/cli/import-bootswatch.php script. Generated bootswatches can be added in the theme becode settings page.
 
 Changed Components
 ------------------
@@ -137,7 +137,7 @@ A new header.mustache template has been created served from core/core_renderer.p
 
 
 === 3.4 ===
-* For improved accessibility, the footer links for boost have been changed to use $bg-inverse-link-color (defaults to white) and
+* For improved accessibility, the footer links for becode have been changed to use $bg-inverse-link-color (defaults to white) and
   now have an underline text-decoration. To override the link colour simply set $bg-inverse-link-color in your preset file or
   theme scss.
 * To match the new primary colour we are switching to using the UX pallette, which uses a purple colour for info. To override,

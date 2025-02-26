@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * An embedded layout for the boost theme.
+ * An embedded layout for the becode theme.
  *
  * @package   theme_becode
  * @copyright 2016 Damyon Wiese

@@ -29,7 +29,7 @@ use \core_privacy\local\metadata\collection;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * The boost theme stores a user preference data.
+ * The becode theme stores a user preference data.
  *
  * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -38,8 +38,7 @@ class provider implements
     // This plugin has data.
     \core_privacy\local\metadata\provider,
     // This plugin has some sitewide user preferences to export.
-    \core_privacy\local\request\user_preference_provider
-{
+    \core_privacy\local\request\user_preference_provider {
 
     /** The user preferences for the course index. */
     const DRAWER_OPEN_INDEX = 'drawer-open-index';
@@ -53,8 +52,7 @@ class provider implements
      * @param  collection $items The initialised item collection to add items to.
      * @return collection A listing of user data stored through this system.
      */
-    public static function get_metadata(collection $items): collection
-    {
+    public static function get_metadata(collection $items): collection {
         $items->add_user_preference(self::DRAWER_OPEN_INDEX, 'privacy:metadata:preference:draweropenindex');
         $items->add_user_preference(self::DRAWER_OPEN_BLOCK, 'privacy:metadata:preference:draweropenblock');
         return $items;
@@ -65,8 +63,7 @@ class provider implements
      *
      * @param int $userid The userid of the user whose data is to be exported.
      */
-    public static function export_user_preferences(int $userid)
-    {
+    public static function export_user_preferences(int $userid) {
 
         $draweropenindexpref = get_user_preferences(self::DRAWER_OPEN_INDEX, null, $userid);
 

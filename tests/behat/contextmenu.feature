@@ -1,6 +1,6 @@
 @javascript @theme_becode
 Feature: Context settings menu
-  To navigate in boost theme I need to use the context settings menu
+  To navigate in becode theme I need to use the context settings menu
 
   Background:
     Given the following "courses" exist:

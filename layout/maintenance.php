@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A maintenance layout for the boost theme.
+ * A maintenance layout for the becode theme.
  *
  * @package   theme_becode
  * @copyright 2016 Damyon Wiese

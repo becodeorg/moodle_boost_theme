@@ -30,10 +30,9 @@ defined('MOODLE_INTERNAL') || die();
  * @param string $tree The CSS tree.
  * @param theme_config $theme The theme config object.
  */
-function theme_becode_css_tree_post_processor($tree, $theme)
-{
+function theme_becode_css_tree_post_processor($tree, $theme) {
     error_log('theme_becode_css_tree_post_processor() is deprecated. Required' .
-        'prefixes for Bootstrap are now in theme/boost/scss/moodle/prefixes.scss');
+        'prefixes for Bootstrap are now in theme/becode/scss/moodle/prefixes.scss');
     $prefixer = new theme_becode\autoprefixer($tree);
     $prefixer->prefix();
 }
@@ -44,8 +43,7 @@ function theme_becode_css_tree_post_processor($tree, $theme)
  * @param theme_config $theme The theme config object.
  * @return string
  */
-function theme_becode_get_extra_scss($theme)
-{
+function theme_becode_get_extra_scss($theme) {
     $content = '';
     $imageurl = $theme->setting_file_url('backgroundimage', 'backgroundimage');
 
@@ -81,11 +79,10 @@ function theme_becode_get_extra_scss($theme)
  * @param array $options
  * @return bool
  */
-function theme_becode_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array())
-{
+function theme_becode_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'backgroundimage' ||
         $filearea === 'loginbackgroundimage')) {
-        $theme = theme_config::load('boost');
+        $theme = theme_config::load('becode');
         // By default, theme files must be cache-able by both browsers and proxies.
         if (!array_key_exists('cacheability', $options)) {
             $options['cacheability'] = 'public';
@@ -101,8 +98,7 @@ function theme_becode_pluginfile($course, $cm, $context, $filearea, $args, $forc
  *
  * @return array[]
  */
-function theme_becode_user_preferences(): array
-{
+function theme_becode_user_preferences(): array {
     return [
         'drawer-open-block' => [
             'type' => PARAM_BOOL,
@@ -125,8 +121,7 @@ function theme_becode_user_preferences(): array
  * @param theme_config $theme The theme config object.
  * @return string
  */
-function theme_becode_get_main_scss_content($theme)
-{
+function theme_becode_get_main_scss_content($theme) {
     global $CFG;
 
     $scss = '';
@@ -135,14 +130,14 @@ function theme_becode_get_main_scss_content($theme)
 
     $context = context_system::instance();
     if ($filename == 'default.scss') {
-        $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
+        $scss .= file_get_contents($CFG->dirroot . '/theme/becode/scss/preset/default.scss');
     } else if ($filename == 'plain.scss') {
-        $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/plain.scss');
+        $scss .= file_get_contents($CFG->dirroot . '/theme/becode/scss/preset/plain.scss');
     } else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_becode', 'preset', 0, '/', $filename))) {
         $scss .= $presetfile->get_content();
     } else {
         // Safety fallback - maybe new installs etc.
-        $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
+        $scss .= file_get_contents($CFG->dirroot . '/theme/becode/scss/preset/default.scss');
     }
 
     return $scss;
@@ -153,10 +148,9 @@ function theme_becode_get_main_scss_content($theme)
  *
  * @return string compiled css
  */
-function theme_becode_get_precompiled_css()
-{
+function theme_becode_get_precompiled_css() {
     global $CFG;
-    return file_get_contents($CFG->dirroot . '/theme/boost/style/moodle.css');
+    return file_get_contents($CFG->dirroot . '/theme/becode/style/moodle.css');
 }
 
 /**
@@ -165,8 +159,7 @@ function theme_becode_get_precompiled_css()
  * @param theme_config $theme The theme config object.
  * @return string
  */
-function theme_becode_get_pre_scss($theme)
-{
+function theme_becode_get_pre_scss($theme) {
     global $CFG;
 
     $scss = '';
@@ -181,7 +174,7 @@ function theme_becode_get_pre_scss($theme)
         if (empty($value)) {
             continue;
         }
-        array_map(function ($target) use (&$scss, $value) {
+        array_map(function($target) use (&$scss, $value) {
             $scss .= '$' . $target . ': ' . $value . ";\n";
         }, (array) $targets);
     }

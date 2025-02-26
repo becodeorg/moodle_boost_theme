@@ -17,7 +17,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * A login page layout for the boost theme.
+ * A login page layout for the becode theme.
  *
  * @package   theme_becode
  * @copyright 2016 Damyon Wiese
@@ -33,3 +33,4 @@ $templatecontext = [
 ];
 
 echo $OUTPUT->render_from_template('theme_becode/login', $templatecontext);
+

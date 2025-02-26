@@ -1,6 +1,6 @@
 @javascript @theme_becode
 Feature: Primary navigation
-  To navigate in boost theme
+  To navigate in becode theme
   As a user
   I need to use the primary navigation
 

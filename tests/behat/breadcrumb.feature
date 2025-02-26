@@ -1,6 +1,6 @@
 @javascript @theme_becode
 Feature: Breadcrumbs navigation
-  To navigate in boost theme
+  To navigate in becode theme
   As an admin user
   I should see breadcrumbs
 

@@ -21,81 +21,75 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import $ from "jquery";
-import Popover from "./popover";
+import $ from 'jquery';
+import Popover from './popover';
 
 const SELECTORS = {
-  FOOTERCONTAINER: '[data-region="footer-container-popover"]',
-  FOOTERCONTENT: '[data-region="footer-content-popover"]',
-  FOOTERBUTTON: '[data-action="footer-popover"]',
+    FOOTERCONTAINER: '[data-region="footer-container-popover"]',
+    FOOTERCONTENT: '[data-region="footer-content-popover"]',
+    FOOTERBUTTON: '[data-action="footer-popover"]'
 };
 
 let footerIsShown = false;
 
 export const init = () => {
-  const container = document.querySelector(SELECTORS.FOOTERCONTAINER);
-  const footerButton = document.querySelector(SELECTORS.FOOTERBUTTON);
+    const container = document.querySelector(SELECTORS.FOOTERCONTAINER);
+    const footerButton = document.querySelector(SELECTORS.FOOTERBUTTON);
 
-  // All jQuery in this code can be replaced when MDL-71979 is integrated.
-  $(footerButton).popover({
-    content: getFooterContent,
-    container: container,
-    html: true,
-    placement: "top",
-    customClass: "footer",
-    trigger: "click",
-    boundary: "viewport",
-    popperConfig: {
-      modifiers: {
-        preventOverflow: {
-          boundariesElement: "viewport",
-          padding: 48,
-        },
-        offset: {},
-        flip: {
-          behavior: "flip",
-        },
-        arrow: {
-          element: ".arrow",
-        },
-      },
+    // All jQuery in this code can be replaced when MDL-71979 is integrated.
+    $(footerButton).popover({
+        content: getFooterContent,
+        container: container,
+        html: true,
+        placement: 'top',
+        customClass: 'footer',
+        trigger: 'click',
+        boundary: 'viewport',
+        popperConfig: {
+            modifiers: {
+                preventOverflow: {
+                    boundariesElement: 'viewport',
+                    padding: 48
+                },
+                offset: {},
+                flip: {
+                    behavior: 'flip'
+                },
+                arrow: {
+                    element: '.arrow'
+                },
+            }
+        }
+    });
+
+    document.addEventListener('click', e => {
+        if (footerIsShown && !e.target.closest(SELECTORS.FOOTERCONTAINER)) {
+            $(footerButton).popover('hide');
+        }
     },
-  });
+    true);
 
-  document.addEventListener(
-    "click",
-    (e) => {
-      if (footerIsShown && !e.target.closest(SELECTORS.FOOTERCONTAINER)) {
-        $(footerButton).popover("hide");
-      }
+    document.addEventListener('keydown', e => {
+        if (footerIsShown && e.key === 'Escape') {
+            $(footerButton).popover('hide');
+            footerButton.focus();
+        }
+    });
+
+    document.addEventListener('focus', e => {
+        if (footerIsShown && !e.target.closest(SELECTORS.FOOTERCONTAINER)) {
+            $(footerButton).popover('hide');
+        }
     },
-    true
-  );
+    true);
 
-  document.addEventListener("keydown", (e) => {
-    if (footerIsShown && e.key === "Escape") {
-      $(footerButton).popover("hide");
-      footerButton.focus();
-    }
-  });
+    $(footerButton).on('show.bs.popover', () => {
+        footerIsShown = true;
+    });
 
-  document.addEventListener(
-    "focus",
-    (e) => {
-      if (footerIsShown && !e.target.closest(SELECTORS.FOOTERCONTAINER)) {
-        $(footerButton).popover("hide");
-      }
-    },
-    true
-  );
-
-  $(footerButton).on("show.bs.popover", () => {
-    footerIsShown = true;
-  });
-
-  $(footerButton).on("hide.bs.popover", () => {
-    footerIsShown = false;
-  });
+    $(footerButton).on('hide.bs.popover', () => {
+        footerIsShown = false;
+    });
 };
 
 /**
@@ -105,7 +99,9 @@ export const init = () => {
  * @private
  */
 const getFooterContent = () => {
-  return document.querySelector(SELECTORS.FOOTERCONTENT).innerHTML;
+    return document.querySelector(SELECTORS.FOOTERCONTENT).innerHTML;
 };
 
-export { Popover };
+export {
+    Popover
+};

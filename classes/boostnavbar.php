@@ -23,14 +23,13 @@ use action_link;
 use lang_string;
 
 /**
- * Creates a navbar for boost that allows easy control of the navbar items.
+ * Creates a navbar for becode that allows easy control of the navbar items.
  *
  * @package    theme_becode
  * @copyright  2021 Adrian Greeve <adrian@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class boostnavbar implements \renderable
-{
+class becodenavbar implements \renderable {
 
     /** @var array The individual items of the navbar. */
     protected $items = [];
@@ -42,20 +41,18 @@ class boostnavbar implements \renderable
      *
      * @param \moodle_page $page The current moodle page.
      */
-    public function __construct(\moodle_page $page)
-    {
+    public function __construct(\moodle_page $page) {
         $this->page = $page;
         foreach ($this->page->navbar->get_items() as $item) {
             $this->items[] = $item;
         }
-        $this->prepare_nodes_for_boost();
+        $this->prepare_nodes_for_becode();
     }
 
     /**
-     * Prepares the navigation nodes for use with boost.
+     * Prepares the navigation nodes for use with becode.
      */
-    protected function prepare_nodes_for_boost(): void
-    {
+    protected function prepare_nodes_for_becode(): void {
         global $PAGE;
 
         // Remove the navbar nodes that already exist in the primary navigation menu.
@@ -154,20 +151,18 @@ class boostnavbar implements \renderable
     }
 
     /**
-     * Get all the boostnavbaritem elements.
+     * Get all the becodenavbaritem elements.
      *
-     * @return boostnavbaritem[] Boost navbar items.
+     * @return becodenavbaritem[] Boost navbar items.
      */
-    public function get_items(): array
-    {
+    public function get_items(): array {
         return $this->items;
     }
 
     /**
-     * Removes all navigation items out of this boost navbar
+     * Removes all navigation items out of this becode navbar
      */
-    protected function clear_items(): void
-    {
+    protected function clear_items(): void {
         $this->items = [];
     }
 
@@ -177,8 +172,7 @@ class boostnavbar implements \renderable
      * @param  string|int $key The identifier of the navbar item to return.
      * @return \breadcrumb_navigation_node|null The navbar item.
      */
-    protected function get_item($key): ?\breadcrumb_navigation_node
-    {
+    protected function get_item($key): ?\breadcrumb_navigation_node {
         foreach ($this->items as $item) {
             if ($key === $item->key) {
                 return $item;
@@ -192,19 +186,17 @@ class boostnavbar implements \renderable
      *
      * @return int How many navbar items there are.
      */
-    protected function item_count(): int
-    {
+    protected function item_count(): int {
         return count($this->items);
     }
 
     /**
-     * Remove a boostnavbaritem from the boost navbar.
+     * Remove a becodenavbaritem from the becode navbar.
      *
-     * @param  string|int $itemkey An identifier for the boostnavbaritem
-     * @param  int|null $itemtype An additional type identifier for the boostnavbaritem (optional)
+     * @param  string|int $itemkey An identifier for the becodenavbaritem
+     * @param  int|null $itemtype An additional type identifier for the becodenavbaritem (optional)
      */
-    protected function remove($itemkey, ?int $itemtype = null): void
-    {
+    protected function remove($itemkey, ?int $itemtype = null): void {
 
         $itemfound = false;
         foreach ($this->items as $key => $item) {
@@ -237,10 +229,9 @@ class boostnavbar implements \renderable
     }
 
     /**
-     * Removes the action from the last item of the boostnavbaritem.
+     * Removes the action from the last item of the becodenavbaritem.
      */
-    protected function remove_last_item_action(): void
-    {
+    protected function remove_last_item_action(): void {
         $item = end($this->items);
         $item->action = null;
         reset($this->items);
@@ -252,8 +243,7 @@ class boostnavbar implements \renderable
      *
      * @return breakcrumb_navigation_node|null The second last navigation node.
      */
-    public function get_penultimate_item(): ?\breadcrumb_navigation_node
-    {
+    public function get_penultimate_item(): ?\breadcrumb_navigation_node {
         $number = $this->item_count() - 2;
         return ($number >= 0) ? $this->items[$number] : null;
     }
@@ -265,13 +255,10 @@ class boostnavbar implements \renderable
      *
      * @param bool $removesections Whether section items should be also removed (only applies when they have an action)
      */
-    protected function remove_no_link_items(bool $removesections = true): void
-    {
+    protected function remove_no_link_items(bool $removesections = true): void {
         foreach ($this->items as $key => $value) {
-            if (
-                !$value->is_last() &&
-                (!$value->has_action() || ($value->type == \navigation_node::TYPE_SECTION && $removesections))
-            ) {
+            if (!$value->is_last() &&
+                    (!$value->has_action() || ($value->type == \navigation_node::TYPE_SECTION && $removesections))) {
                 unset($this->items[$key]);
             }
         }
@@ -286,8 +273,7 @@ class boostnavbar implements \renderable
      *
      * @param view $navigationview The navigation view object.
      */
-    protected function remove_items_that_exist_in_navigation(view $navigationview): void
-    {
+    protected function remove_items_that_exist_in_navigation(view $navigationview): void {
         // Loop through the navigation view items and create a 'text' => 'action' array which will be later used
         // to compare whether any of the breadcrumb items matches these pairs.
         $navigationviewitems = [];
@@ -302,10 +288,8 @@ class boostnavbar implements \renderable
         foreach ($this->items as $item) {
             list($itemtext, $itemaction) = $this->get_node_text_and_action($item);
             if ($itemaction) {
-                if (
-                    array_key_exists($itemtext, $navigationviewitems) &&
-                    $navigationviewitems[$itemtext] === $itemaction
-                ) {
+                if (array_key_exists($itemtext, $navigationviewitems) &&
+                        $navigationviewitems[$itemtext] === $itemaction) {
                     $this->remove($item->key);
                 }
             }
@@ -317,11 +301,10 @@ class boostnavbar implements \renderable
      *
      * This method looks for breadcrumb items that have identical text and action values and removes the first item.
      */
-    protected function remove_duplicate_items(): void
-    {
+    protected function remove_duplicate_items(): void {
         $taken = [];
         // Reverse the order of the items before filtering so that the first occurrence is removed instead of the last.
-        $filtereditems = array_values(array_filter(array_reverse($this->items), function ($item) use (&$taken) {
+        $filtereditems = array_values(array_filter(array_reverse($this->items), function($item) use (&$taken) {
             list($itemtext, $itemaction) = $this->get_node_text_and_action($item);
             if ($itemaction) {
                 if (array_key_exists($itemtext, $taken) && $taken[$itemtext] === $itemaction) {
@@ -342,8 +325,7 @@ class boostnavbar implements \renderable
      * @param navigation_node $node The navigation node object.
      * @return array
      */
-    protected function get_node_text_and_action(navigation_node $node): array
-    {
+    protected function get_node_text_and_action(navigation_node $node): array {
         $text = $node->text instanceof lang_string ? $node->text->out() : $node->text;
         $action = null;
         if ($node->has_action()) {

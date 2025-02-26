@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A drawer based layout for the boost theme.
+ * A drawer based layout for the becode theme.
  *
  * @package   theme_becode
  * @copyright 2021 Bas Brands

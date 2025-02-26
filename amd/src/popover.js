@@ -21,6 +21,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import Popover from "./bootstrap/popover";
+import Popover from './bootstrap/popover';
 
-export { Popover };
+export {
+    Popover
+};

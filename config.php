@@ -26,12 +26,12 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . '/lib.php');
 
-$THEME->name = 'moodle';
+$THEME->name = 'becode';
 $THEME->sheets = [];
 $THEME->editor_sheets = [];
 $THEME->editor_scss = ['editor'];
 $THEME->usefallback = true;
-$THEME->scss = function ($theme) {
+$THEME->scss = function($theme) {
     return theme_becode_get_main_scss_content($theme);
 };
 
@@ -185,7 +185,7 @@ $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
 $THEME->haseditswitch = true;
 $THEME->usescourseindex = true;
-// By default, all boost theme do not need their titles displayed.
+// By default, all becode theme do not need their titles displayed.
 $THEME->activityheaderconfig = [
     'notitle' => true
 ];

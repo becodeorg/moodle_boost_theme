@@ -1,5 +1,5 @@
 @javascript @theme_becode
-Feature: Add a block using boost theme
+Feature: Add a block using becode theme
   In order to decide the blocks to display in the Add a block list for a theme
   As an administrator
   I need to define them using the unaddableblocks setting

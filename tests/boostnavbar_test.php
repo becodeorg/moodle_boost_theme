@@ -17,23 +17,21 @@
 namespace theme_becode;
 
 /**
- * Test the boostnavbar file
+ * Test the becodenavbar file
  *
  * @package    theme_becode
- * @covers     \theme_becode\boostnavbar
+ * @covers     \theme_becode\becodenavbar
  * @copyright  2021 Peter Dias
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class boostnavbar_test extends \advanced_testcase
-{
+final class becodenavbar_test extends \advanced_testcase {
     /**
      * Provider for test_remove_no_link_items
      * The setup and expected arrays are defined as an array of 'nodekey' => $hasaction
      *
      * @return array
      */
-    public static function remove_no_link_items_provider(): array
-    {
+    public static function remove_no_link_items_provider(): array {
         return [
             'All nodes have links links including leaf node. Set to remove section nodes.' => [
                 [
@@ -187,8 +185,7 @@ final class boostnavbar_test extends \advanced_testcase
      * @param array $expected
      * @throws \ReflectionException
      */
-    public function test_remove_no_link_items(array $setup, bool $removesectionnodes, array $expected): void
-    {
+    public function test_remove_no_link_items(array $setup, bool $removesectionnodes, array $expected): void {
         global $PAGE;
 
         $this->resetAfterTest();
@@ -201,28 +198,25 @@ final class boostnavbar_test extends \advanced_testcase
         // A dummy url to use. We don't care where it's pointing to.
         $url = new \moodle_url('/');
         foreach ($setup as $key => $value) {
-            $page->navbar->add(
-                $key,
-                $value['hasaction'] ? $url : null,
-                $value['issection'] ? \navigation_node::TYPE_SECTION : null
-            );
+            $page->navbar->add($key, $value['hasaction'] ? $url : null,
+                $value['issection'] ? \navigation_node::TYPE_SECTION : null);
         }
 
-        $boostnavbar = $this->getMockBuilder(boostnavbar::class)
+        $becodenavbar = $this->getMockBuilder(becodenavbar::class)
             ->disableOriginalConstructor()
             ->onlyMethods([])
             ->getMock();
 
-        $rc = new \ReflectionClass(boostnavbar::class);
+        $rc = new \ReflectionClass(becodenavbar::class);
         $rcp = $rc->getProperty('items');
-        $rcp->setValue($boostnavbar, $page->navbar->get_items());
+        $rcp->setValue($becodenavbar, $page->navbar->get_items());
 
         // Make the call to the function.
         $rcm = $rc->getMethod('remove_no_link_items');
-        $rcm->invoke($boostnavbar, $removesectionnodes);
+        $rcm->invoke($becodenavbar, $removesectionnodes);
 
         // Get the value for the class variable that the function modifies.
-        $values = $rcp->getValue($boostnavbar);
+        $values = $rcp->getValue($becodenavbar);
         $actual = [];
         foreach ($values as $value) {
             $actual[$value->text] = $value->has_action();
@@ -235,8 +229,7 @@ final class boostnavbar_test extends \advanced_testcase
      *
      * @return array
      */
-    public static function remove_duplicate_items_provider(): array
-    {
+    public static function remove_duplicate_items_provider(): array {
         global $CFG;
 
         return [
@@ -376,8 +369,7 @@ final class boostnavbar_test extends \advanced_testcase
      * @param array $navbarnodes The array containing the text and action of the nodes to be added to the navbar
      * @param array $expected The array containing the text of the expected navbar nodes
      */
-    public function test_remove_duplicate_items(array $navbarnodes, array $expected): void
-    {
+    public function test_remove_duplicate_items(array $navbarnodes, array $expected): void {
         $this->resetAfterTest();
         $page = new \moodle_page();
         $page->set_url('/');
@@ -387,21 +379,21 @@ final class boostnavbar_test extends \advanced_testcase
             $page->navbar->add($node['text'], $node['action'], \navigation_node::TYPE_CUSTOM);
         }
 
-        $boostnavbar = $this->getMockBuilder(boostnavbar::class)
+        $becodenavbar = $this->getMockBuilder(becodenavbar::class)
             ->disableOriginalConstructor()
             ->onlyMethods([])
             ->getMock();
 
-        $rc = new \ReflectionClass(boostnavbar::class);
+        $rc = new \ReflectionClass(becodenavbar::class);
         $rcp = $rc->getProperty('items');
-        $rcp->setValue($boostnavbar, $page->navbar->get_items());
+        $rcp->setValue($becodenavbar, $page->navbar->get_items());
 
         // Make the call to the function.
         $rcm = $rc->getMethod('remove_duplicate_items');
-        $rcm->invoke($boostnavbar);
+        $rcm->invoke($becodenavbar);
 
         // Get the value for the class variable that the function modifies.
-        $values = $rcp->getValue($boostnavbar);
+        $values = $rcp->getValue($becodenavbar);
         $actual = [];
         foreach ($values as $value) {
             $actual[] = $value->text;
@@ -415,8 +407,7 @@ final class boostnavbar_test extends \advanced_testcase
      *
      * @return array
      */
-    public static function remove_items_that_exist_in_navigation_provider(): array
-    {
+    public static function remove_items_that_exist_in_navigation_provider(): array {
         global $CFG;
 
         return [
@@ -496,12 +487,8 @@ final class boostnavbar_test extends \advanced_testcase
      * @param array $navbarnodes Array containing the text => action of the nodes to be added to the navbar
      * @param array $expected Array containing the text of the expected navbar nodes after the filtering
      */
-    public function test_remove_items_that_exist_in_navigation(
-        string $navmenu,
-        array $navmenunodes,
-        array $navbarnodes,
-        array $expected
-    ): void {
+    public function test_remove_items_that_exist_in_navigation(string $navmenu, array $navmenunodes, array $navbarnodes,
+            array $expected): void {
         global $PAGE;
 
         // Unfortunate hack needed because people use global $PAGE around the place.
@@ -529,21 +516,21 @@ final class boostnavbar_test extends \advanced_testcase
             $page->navbar->add($text, $action, \navigation_node::TYPE_CUSTOM);
         }
 
-        $boostnavbar = $this->getMockBuilder(boostnavbar::class)
+        $becodenavbar = $this->getMockBuilder(becodenavbar::class)
             ->disableOriginalConstructor()
             ->onlyMethods([])
             ->getMock();
 
-        $rc = new \ReflectionClass(boostnavbar::class);
+        $rc = new \ReflectionClass(becodenavbar::class);
         $rcp = $rc->getProperty('items');
-        $rcp->setValue($boostnavbar, $page->navbar->get_items());
+        $rcp->setValue($becodenavbar, $page->navbar->get_items());
 
         // Make the call to the function.
         $rcm = $rc->getMethod('remove_items_that_exist_in_navigation');
-        $rcm->invoke($boostnavbar, $navigationmenu);
+        $rcm->invoke($becodenavbar, $navigationmenu);
 
         // Get the value for the class variable that the function modifies.
-        $values = $rcp->getValue($boostnavbar);
+        $values = $rcp->getValue($becodenavbar);
         $actual = [];
         foreach ($values as $value) {
             $actual[] = $value->text;
